@@ -1,9 +1,14 @@
 'use strict';
-
-module.exports = (Sequelize, sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Client = sequelize.define('Client', {
-    firstName: { type: Sequelize.STRING },
-    lastName: { type: Sequelize.STRING }
-  })
-  return Client
+    nome: DataTypes.STRING,
+    idade: DataTypes.INTEGER,
+    endereco: DataTypes.STRING,
+    num_conta: DataTypes.INTEGER,
+    saldo: DataTypes.FLOAT
+  }, {});
+  Client.associate = function(models) {
+    Client.hasMany(models.Transaction, {foreignKey: 'transactionId', onDelete: 'cascade', hooks: true});
+  };
+  return Client;
 };
