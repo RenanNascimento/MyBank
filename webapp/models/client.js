@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (Sequelize, sequelize) => {
   const Client = sequelize.define('Client', {
-    nome: DataTypes.STRING,
-    firstName: DataTypes.STRING
-  }, {});
-  return Client;
+    firstName: { type: Sequelize.STRING },
+    lastName: { type: Sequelize.STRING }
+  })
+  return Client
 };

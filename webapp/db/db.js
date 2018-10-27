@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const ClientModel = require('../models/client')
 
 const POSTGRES_HOST     = process.env.POSTGRES_HOST
 const POSTGRES_PORT     = process.env.POSTGRES_PORT
@@ -27,7 +28,10 @@ sequelize
     .then(() => {
         console.log('Connection to postgres has been established successfully.');
         console.log('Criating tables...');
-        
+        ClientModel(Sequelize, sequelize)
+            .sync()
+            .then(() => console.log("Client table was created successfully!"))
+            .catch(err => console.log(`ERROR creating table Client: ${err}`));
     })
     .catch(err => {
         console.log('Unable to connect to the database:', err);
