@@ -31,18 +31,18 @@ sequelize
         console.log('Criating tables...');
         let transaction = TransactionModel(sequelize, Sequelize.DataTypes)
         transaction
-            .sync()
+            .sync({force: true})
             .then(() => {
                 console.log("Transaction table was created successfully!")
-                transaction.associate(sequelize.models)
+  //              transaction.associate(sequelize.models)
             })
             .catch(err => console.log(`ERROR creating table Transaction: ${err}`));
         let client = ClientModel(sequelize, Sequelize.DataTypes)
         client
-            .sync()
+            .sync({force: true})
             .then(() => {
                 console.log("Client table was created successfully!")
-                client.associate(sequelize.models)
+//                client.associate(sequelize.models)
             })
             .catch(err => console.log(`ERROR creating table Client: ${err}`));
     })

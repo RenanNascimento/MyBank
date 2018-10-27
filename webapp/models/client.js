@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     saldo: DataTypes.FLOAT
   }, {});
   Client.associate = function(models) {
-    Client.hasMany(models.Transaction, {foreignKey: 'transactionId', onDelete: 'cascade', hooks: true});
+    Client.hasMany(models.Transaction, {onDelete: 'cascade', hooks: true});
   };
   return Client;
 };
