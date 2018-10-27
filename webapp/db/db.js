@@ -14,3 +14,5 @@ const pgClient = new pg.Client({
 
 console.log("Connecting with Postgres...")
 pgClient.connect()
+
+module.exports = pgClient

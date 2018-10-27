@@ -1,6 +1,3 @@
-const path = require('path');
-const express = require('express');
-
 const indexRouter  = require('./index.route')
 const clientsRoute = require('./clients.route')
 
