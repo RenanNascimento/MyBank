@@ -24,7 +24,8 @@ services:
       - ./webapp:/usr/src/app
     networks:
      - rtls-uwb-network
-  
+    command: ["./db/wait-for-postgres.sh", "npm", "start"]
+
   postgres:
     build: 
       context: ./postgres
