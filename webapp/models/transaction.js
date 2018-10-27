@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     valor: DataTypes.FLOAT
   }, {});
   Transaction.associate = function(models) {
-    // associations can be defined here
+    Transaction.belongsTo(models.Client);
   };
   return Transaction;
 };

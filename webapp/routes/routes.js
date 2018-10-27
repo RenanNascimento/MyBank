@@ -1,9 +1,9 @@
 const indexRouter  = require('./index.route')
-const clientsRoute = require('./clients.route')
+const clientRoute = require('./client.route')
 
 const configRoutes = app => {
   app.use('/', indexRouter);
-  app.use('/clients', clientsRoute);
+  app.use('/clients', clientRoute);
 }
 
 module.exports = { configRoutes }
