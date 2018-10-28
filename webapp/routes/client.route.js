@@ -87,4 +87,17 @@ router.post('/', (req, res) => {
     .catch(err => next(err));
 })
 
+/* GET extrato by client_id */
+router.get('/extrato/:account_id', (req, res, next) => {
+  let account_id = req.params.account_id;
+  model.Transaction
+    .findAll({
+      where: {
+        client_id: account_id
+      }
+    })
+    .then(client => res.json(client))
+    .catch(err => next(err))
+});
+
 module.exports = router;

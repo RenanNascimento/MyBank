@@ -66,5 +66,26 @@ router.post('/depositar/:account_id', (req, result) => {
   })
 });
 
+router.get('/extrato/:account_id', (req, result) => {
+  let reqURL = `http://${WEB_HOST}:${PORT}/clients/extrato/${req.params.account_id}`
+  request(reqURL, (error, res, body) => {
+    if(error) console.log(error) 
+    else{
+      let data = JSON.parse(body)
+      data = data.map(d => {
+        return {
+          client_id: d.client_id,
+          natureza: d.natureza,
+          valor: parseFloat(d.valor).toFixed(2).replace('.', ','),
+          saldo_parcial: parseFloat(d.saldo_parcial).toFixed(2).replace('.', ','),
+          createdAt: d.createdAt,
+          updatedAt: d.updatedAt.split('-')[2].slice(0,2)+'/'+d.updatedAt.split('-')[1]+'/'+d.updatedAt.split('-')[0]
+        }
+      })
+      result.render('extrato', {id: req.params.account_id, extratos: data});
+    }
+  })
+});
+
 
 module.exports = router;
