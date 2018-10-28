@@ -2,22 +2,48 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+let request = require('request');
 
 var model = require('../models/index');
+
+const PORT = process.env.PORT || '3000';
+const WEB_HOST = process.env.WEB_HOST || 'localhost';
 
 router.get('/login', (req, res, next) => {
   res.render('login');
 })
 
-router.post('/entrar', (req, res, next) => {
+router.post('/entrar', (req, result, next) => {
   model.Client
   .findAll({
     where: {
-      nome: "renan",
-      senha: "renan"
+      nome: req.body.nome,
+      senha: req.body.senha
     }
   })
-  .then(client => res.redirect('/menu-transacoes/'+client[0].dataValues.id))
+  .then(client => {
+    if(req.body.nome == "admin" && req.body.senha == "admin"){
+
+      let reqURL = `http://${WEB_HOST}:${PORT}/clients/`
+      request(reqURL, (error, res, body) => {
+        if(error) console.log(error) 
+        else{
+          let data = JSON.parse(body)
+          data = data.map(d => {
+            return {
+              nome: d.nome,
+              num_conta: d.num_conta,
+              saldo: parseFloat(d.saldo).toFixed(2).replace('.', ',')
+            }
+          })
+          result.render('admin', { clients: data });
+        }
+      })
+    }else{
+      result.redirect('/menu-transacoes/'+client[0].dataValues.id)
+    }
+    
+  })
   .catch(err => console.log(err))
 })
 
