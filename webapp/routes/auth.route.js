@@ -67,9 +67,11 @@ router.post('/cadastrar', (req, res, next) => {
           saldo: 0.0,
           senha: senha
         })
-      .then(client => {
-        res.redirect('/menu-transacoes/'+client.dataValues.id);
-      })
+      .then(client => client.update({
+        num_conta: `00${client.dataValues.id}-0`
+      }).then(new_client => res.redirect('/menu-transacoes/'+new_client.dataValues.id))
+        .catch(err => next(err))
+      )
       .catch(err => {
         res.status(401)
           .json({
