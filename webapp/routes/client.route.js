@@ -24,8 +24,8 @@ router.get('/:account_id', (req, res, next) => {
     .catch(err => next(err))
 });
 
-/* Update client saldo */
-router.get('/:account_id/:valor_saque', (req, res, next) => {
+/* Update client saldo - saque */
+router.get('/sacar/:account_id/:valor_saque', (req, res, next) => {
   let account_id = req.params.account_id;
   let valor_saque = req.params.valor_saque;
 
@@ -37,10 +37,25 @@ router.get('/:account_id/:valor_saque', (req, res, next) => {
     })
     .then(client => client.update({
       saldo: client.dataValues.saldo - valor_saque
-    }).then((new_client) => {
-      //console.log(new_client)
-      res.json(new_client)
-    }))
+      //saldo: valor_saque
+    }).then((new_client) => res.json(new_client)))
+    .catch(err => next(err))
+});
+
+/* Update client saldo - deposito */
+router.get('/depositar/:account_id/:valor_deposito', (req, res, next) => {
+  let account_id = req.params.account_id;
+  let valor_deposito = req.params.valor_deposito;
+
+  model.Client
+    .findOne({
+      where: {
+        id: account_id
+      }
+    })
+    .then(client => client.update({
+      saldo: client.dataValues.saldo + valor_deposito
+    }).then((new_client) => res.json(new_client) ))
     .catch(err => next(err))
 });
 
