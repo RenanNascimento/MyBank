@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const passport = require('passport');
 let cookieParser = require('cookie-parser');
 
 const router = require('./routes/routes');
@@ -14,13 +13,11 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
-router.configRoutes(app, passport)
-
-require('./passport')
+router.configRoutes(app)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)))

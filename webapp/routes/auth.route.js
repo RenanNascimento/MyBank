@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const passport = require('passport')
+const passport = require('passport');
+const querystring = require('querystring');
+
 var model = require('../models/index');
 
 router.post('/login', (req, res, next) => {
@@ -59,7 +61,6 @@ router.post('/authenticate', (req, res, next) => {
     })
 });
 
-
 router.post('/cadastrar', (req, res, next) => {
     let { nome, idade, endereco, num_conta, saldo, senha } = req.body
   
@@ -69,14 +70,11 @@ router.post('/cadastrar', (req, res, next) => {
           idade: idade,
           endereco: endereco,
           num_conta: num_conta,
-          saldo: saldo,
+          saldo: 0.0,
           senha: senha
         })
       .then(client => {
-        res.status(200)
-          .json({
-            success: true
-          })
+        res.redirect('/menu-transacoes/'+client.dataValues.id);
       })
       .catch(err => {
         res.status(401)
@@ -85,42 +83,5 @@ router.post('/cadastrar', (req, res, next) => {
           })
       })
   });
-
-router.post('/register', (req, res, next) => {
-  let { nome, idade, endereco, num_conta, saldo, senha } = req.body
-
-  const generateHash = (senha) => new Promise((res, rej) => {
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) rej(err)
-      else bcrypt.hash(senha, salt, (err, hash) => {
-        if (err) rej(err)
-        else res(hash)
-      });
-    });
-  })
-  generateHash(senha)
-    .then(hash => model.Client
-      .create({
-        nome: nome,
-        idade: idade,
-        endereco: endereco,
-        num_conta: num_conta,
-        saldo: saldo,
-        senha: hash
-      })
-    )
-    .then(client => {
-      res.status(200)
-        .json({
-          success: true
-        })
-    })
-    .catch(err => {
-      res.status(401)
-        .json({
-          message: `Registration failed: ${err}`
-        })
-    })
-});
 
 module.exports = router;

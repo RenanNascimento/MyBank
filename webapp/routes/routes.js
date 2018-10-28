@@ -7,7 +7,7 @@ const configRoutes = (app, passport) => {
   app.use('/', indexRouter);
   app.use('/clients', clientRoute);
   app.use('/auth', authRouter);
-  app.use('/menu-transacoes', passport.authenticate('jwt', {session: false}), transactionsMenuRouter);
+  app.use('/menu-transacoes', transactionsMenuRouter);
 }
 
 module.exports = { configRoutes }

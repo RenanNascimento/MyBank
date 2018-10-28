@@ -7,24 +7,24 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <form class="form-signin">
+            <form class="form-signin" method="POST" action="auth/cadastrar">
               <div class="form-label-group">
-                <input type="text" id="inputNomeCompleto" class="form-control" placeholder="Nome completo" required autofocus>
+                <input type="text" id="inputNomeCompleto" class="form-control" placeholder="Nome completo" name="nome" required autofocus>
                 <label for="inputNomeCompleto">Nome completo</label>
               </div>
 
               <div class="form-label-group">
-                <input type="number" id="inputIdade" class="form-control" placeholder="Idade" required autofocus>
+                <input type="number" id="inputIdade" class="form-control" placeholder="Idade" name="idade" required autofocus>
                 <label for="inputIdade">Idade</label>
               </div>
 
               <div class="form-label-group">
-                <input type="text" id="inputEndereco" class="form-control" placeholder="Endereço" required autofocus>
+                <input type="text" id="inputEndereco" class="form-control" placeholder="Endereço" name="endereco" required autofocus>
                 <label for="inputEndereco">Endereço</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="senha" required>
                 <label for="inputPassword">Senha</label>
               </div>
 
