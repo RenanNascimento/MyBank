@@ -24,6 +24,26 @@ router.get('/:account_id', (req, res, next) => {
     .catch(err => next(err))
 });
 
+/* Update client saldo */
+router.get('/:account_id/:valor_saque', (req, res, next) => {
+  let account_id = req.params.account_id;
+  let valor_saque = req.params.valor_saque;
+
+  model.Client
+    .findOne({
+      where: {
+        id: account_id
+      }
+    })
+    .then(client => client.update({
+      saldo: client.dataValues.saldo - valor_saque
+    }).then((new_client) => {
+      //console.log(new_client)
+      res.json(new_client)
+    }))
+    .catch(err => next(err))
+});
+
 /* Create a client */
 router.post('/', (req, res) => {
   console.log(req.body)

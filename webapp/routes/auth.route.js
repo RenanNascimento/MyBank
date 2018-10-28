@@ -2,29 +2,23 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
-const querystring = require('querystring');
 
 var model = require('../models/index');
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {session: false}, (err, user, info) => {
-        if(err) console.log(err);
-        if (err || !user) {
-            return res.status(400).json({
-                message: info ? info.message : 'Login failed',
-                user: user
-            });
-        }
-        req.login(user, {session: false}, (err) => {
-            if (err) {
-                res.send(err);
-            }
-            const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
+router.get('/login', (req, res, next) => {
+  res.render('login');
+})
 
-            return res.json({user, token});
-        });
-    })(req, res);
+router.post('/entrar', (req, res, next) => {
+  model.Client
+  .findAll({
+    where: {
+      nome: "renan",
+      senha: "renan"
+    }
+  })
+  .then(client => res.redirect('/menu-transacoes/'+client[0].dataValues.id))
+  .catch(err => console.log(err))
 })
 
 router.post('/authenticate', (req, res, next) => {
