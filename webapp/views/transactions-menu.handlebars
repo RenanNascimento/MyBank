@@ -1,5 +1,29 @@
-<p>Olá {{nome}}</p>
-<p>Seu saldo atual é: R$ {{saldo}}</p>
+<div class="wrapper">
 
-<script src="libs/socket.js"></script>
-<script src="js/menu.js"></script>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>MyBank</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Transações</p>
+            <li>
+                <a href="#">Sacar</a>
+            </li>
+            <li>
+                <a href="#">Depositar</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h1>Olá {{nome}}</h1>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h2>Seu saldo atual é de: R${{saldo}}</h2>
+        </nav>
+    </div>
+
+</div>   
