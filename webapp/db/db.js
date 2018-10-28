@@ -31,7 +31,7 @@ sequelize
         console.log('Criating tables...');
         let transaction = TransactionModel(sequelize, Sequelize.DataTypes)
         transaction
-            .sync({force: true})
+            .sync()
             .then(() => {
                 console.log("Transaction table was created successfully!")
   //              transaction.associate(sequelize.models)
@@ -39,7 +39,7 @@ sequelize
             .catch(err => console.log(`ERROR creating table Transaction: ${err}`));
         let client = ClientModel(sequelize, Sequelize.DataTypes)
         client
-            .sync({force: true})
+            .sync()
             .then(() => {
                 console.log("Client table was created successfully!")
 //                client.associate(sequelize.models)

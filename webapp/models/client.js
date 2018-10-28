@@ -4,11 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     nome: DataTypes.STRING,
     idade: DataTypes.INTEGER,
     endereco: DataTypes.STRING,
-    num_conta: DataTypes.INTEGER,
-    saldo: DataTypes.FLOAT
+    num_conta: DataTypes.STRING,
+    saldo: DataTypes.FLOAT,
+    senha: DataTypes.STRING
   }, {});
   Client.associate = function(models) {
-    Client.hasMany(models.Transaction, {onDelete: 'cascade', hooks: true});
+    // associations can be defined here
   };
   return Client;
 };

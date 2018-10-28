@@ -1,11 +1,13 @@
 const indexRouter  = require('./index.route')
 const clientRoute = require('./client.route')
+const authRouter = require('./auth.route');
 const transactionsMenuRouter = require('./transactions-menu.route.js')
 
-const configRoutes = app => {
+const configRoutes = (app, passport) => {
   app.use('/', indexRouter);
-  app.use('/menu-transacoes', transactionsMenuRouter);
   app.use('/clients', clientRoute);
+  app.use('/auth', authRouter);
+  app.use('/menu-transacoes', passport.authenticate('jwt', {session: false}), transactionsMenuRouter);
 }
 
 module.exports = { configRoutes }
