@@ -14,6 +14,8 @@ services:
     ports: 
       - "${PORT}:${PORT}"
     environment:
+      - WEB_HOST=${WEB_HOST}
+      - PORT=${PORT}
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
