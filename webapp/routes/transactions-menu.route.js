@@ -18,7 +18,7 @@ router.get('/:account_id', (req, res) => {
       console.log(body)
     }
   })
-  res.render('transactions-menu', { nome: 'oi', saldo: 20 });
+  res.render('transactions-menu', { nome: 'Renan', saldo: 20 });
 });
 
 module.exports = router;

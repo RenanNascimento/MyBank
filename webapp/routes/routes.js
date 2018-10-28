@@ -4,7 +4,7 @@ const transactionsMenuRouter = require('./transactions-menu.route.js')
 
 const configRoutes = app => {
   app.use('/', indexRouter);
-  app.use('/transactions-menu', transactionsMenuRouter);
+  app.use('/menu-transacoes', transactionsMenuRouter);
   app.use('/clients', clientRoute);
 }
 
