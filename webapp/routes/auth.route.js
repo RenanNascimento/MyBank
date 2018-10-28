@@ -10,7 +10,7 @@ const PORT = process.env.PORT || '3000';
 const WEB_HOST = process.env.WEB_HOST || 'localhost';
 
 router.get('/login', (req, res, next) => {
-  res.render('login');
+  res.render('login', {userNotFound: false});
 })
 
 router.post('/entrar', (req, result, next) => {
@@ -44,7 +44,7 @@ router.post('/entrar', (req, result, next) => {
     }
     
   })
-  .catch(err => console.log(err))
+  .catch(err => result.render('login', {userNotFound: true}))
 })
 
 router.post('/authenticate', (req, res, next) => {
@@ -83,7 +83,7 @@ router.post('/authenticate', (req, res, next) => {
 
 router.post('/cadastrar', (req, res, next) => {
     let { nome, idade, endereco, num_conta, saldo, senha } = req.body
-  
+
     model.Client
         .create({
           nome: nome,

@@ -13,10 +13,15 @@ router.get('/', (req, res) => {
 router.get('/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/${req.params.account_id}`
   request(reqURL, (error, res, body) => {
-    if(error) console.log(error) 
+    if(error) console.log(error)
     else{
-      let data = JSON.parse(body)[0]
-      result.render('transactions-menu', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      let data = JSON.parse(body)
+      if(data.length != 0){
+        data = data[0]
+        result.render('transactions-menu', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      }else{
+        result.render('error')
+      }
     }
   })
 });
@@ -26,8 +31,13 @@ router.get('/sacar/:account_id', (req, result) => {
   request(reqURL, (error, res, body) => {
     if(error) console.log(error) 
     else{
-      let data = JSON.parse(body)[0]
-      result.render('sacar', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      let data = JSON.parse(body)
+      if(data.length != 0){
+        data = data[0]
+        result.render('sacar', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      }else{
+        result.render('error')
+      }
     }
   })
 });
@@ -49,8 +59,13 @@ router.get('/depositar/:account_id', (req, result) => {
   request(reqURL, (error, res, body) => {
     if(error) console.log(error) 
     else{
-      let data = JSON.parse(body)[0]
-      result.render('depositar', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      let data = JSON.parse(body)
+      if(data.length != 0){
+        data = data[0]
+        result.render('depositar', { id: data.id, nome: data.nome, num_conta: data.num_conta, saldo: data.saldo.toFixed(2).replace('.', ',') });
+      }else{
+        result.render('error')
+      }
     }
   })
 });

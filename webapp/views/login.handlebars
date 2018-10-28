@@ -1,9 +1,17 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
+        {{#if userNotFound}}
+          <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Usuário não encontrado</strong>
+          </div>
+        {{/if}}
         <div class="card card-signin flex-row my-5">
           <div class="card-img-left d-none d-md-flex">
-            <h5 class="card-title text-center">MyBank</h5>
+            <a href="#"><h5 class="card-title text-center">MyBank</h5></a>
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
@@ -19,7 +27,7 @@
               </div>
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
-              *Para acessar como administrador, basta logar com nome e senha admin
+              *Para acessar como administrador basta logar com nome e senha admin
             </form>
           </div>
         </div>

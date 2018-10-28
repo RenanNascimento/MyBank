@@ -2,7 +2,7 @@
 
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3><a href="/">MyBank</a></h3>
+            <h3><a href="#">MyBank</a></h3>
         </div>
 
         <ul class="list-unstyled components">
@@ -17,10 +17,10 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <h1>Olá admin,</h1>
         </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <h2>Aqui você encontra o saldo de todos os clientes do MyBank</h2>
-        </nav>
         {{#if clients}}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <h2>Aqui você encontra o saldo de todos os clientes do MyBank</h2>
+            </nav>
             {{#each clients}}
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <h5>Cliente: {{this.nome}} | Conta: {{this.num_conta}} | Saldo: R$ {{this.saldo}}</h5>
