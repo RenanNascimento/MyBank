@@ -37,8 +37,17 @@ router.get('/sacar/:account_id/:valor_saque', (req, res, next) => {
     })
     .then(client => client.update({
       saldo: client.dataValues.saldo - valor_saque
-      //saldo: valor_saque
-    }).then((new_client) => res.json(new_client)))
+    }).then(new_client => {
+      model.Transaction
+        .create({
+          client_id: new_client.dataValues.id,
+          natureza: "SAQUE",
+          valor: valor_saque,
+          saldo_parcial: new_client.dataValues.saldo
+        })
+        .then(transaction => res.json(new_client))
+        .catch(err => next(err))
+    }))
     .catch(err => next(err))
 });
 
@@ -54,8 +63,18 @@ router.get('/depositar/:account_id/:valor_deposito', (req, res, next) => {
       }
     })
     .then(client => client.update({
-      saldo: client.dataValues.saldo + valor_deposito
-    }).then((new_client) => res.json(new_client) ))
+      saldo: parseFloat(client.dataValues.saldo) + parseFloat(valor_deposito)
+    }).then(new_client => {
+      model.Transaction
+        .create({
+          client_id: new_client.dataValues.id,
+          natureza: "DEPOSITO",
+          valor: valor_deposito,
+          saldo_parcial: new_client.dataValues.saldo
+        })
+        .then(transaction => res.json(new_client))
+        .catch(err => next(err))
+    }))
     .catch(err => next(err))
 });
 
