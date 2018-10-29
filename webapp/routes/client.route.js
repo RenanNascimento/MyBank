@@ -80,7 +80,6 @@ router.get('/depositar/:account_id/:valor_deposito', (req, res, next) => {
 
 /* Create a client */
 router.post('/', (req, res) => {
-  console.log(req.body)
   model.Client
     .create(req.body)
     .then(client => res.json(client))

@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
   res.render('error');
 });
 
+/* Get page menu transacoes */
 router.get('/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/${req.params.account_id}`
   request(reqURL, (error, res, body) => {
@@ -26,6 +27,7 @@ router.get('/:account_id', (req, result) => {
   })
 });
 
+/* Get page sacar */
 router.get('/sacar/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/${req.params.account_id}`
   request(reqURL, (error, res, body) => {
@@ -42,6 +44,7 @@ router.get('/sacar/:account_id', (req, result) => {
   })
 });
 
+/* POST saque */
 router.post('/sacar/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/sacar/${req.params.account_id}/${req.body.saque}`
   console.log(reqURL)
@@ -54,6 +57,7 @@ router.post('/sacar/:account_id', (req, result) => {
   })
 });
 
+/* Get page depositar */
 router.get('/depositar/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/${req.params.account_id}`
   request(reqURL, (error, res, body) => {
@@ -70,6 +74,7 @@ router.get('/depositar/:account_id', (req, result) => {
   })
 });
 
+/* POST deposito */
 router.post('/depositar/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/depositar/${req.params.account_id}/${req.body.deposito}`
   request(reqURL, (error, res, body) => {
@@ -81,6 +86,7 @@ router.post('/depositar/:account_id', (req, result) => {
   })
 });
 
+/* Get page extrato */
 router.get('/extrato/:account_id', (req, result) => {
   let reqURL = `http://${WEB_HOST}:${PORT}/clients/extrato/${req.params.account_id}`
   request(reqURL, (error, res, body) => {
